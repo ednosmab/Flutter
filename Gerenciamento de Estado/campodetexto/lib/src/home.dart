@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './models/contador.dart';
 import './models/campotexto.dart';
+import 'formulario.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -13,6 +14,10 @@ class HomePage extends StatelessWidget {
       body: Center(
           child: Column(
         children: [
+          Formulario(),
+          Container(
+            height: 100,
+          ),
           Container(
             child: TextField(
               decoration: InputDecoration(
