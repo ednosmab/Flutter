@@ -7,6 +7,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPage extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
+  String email = '';
+  String senha = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,15 +19,21 @@ class _LoginPage extends State<LoginPage> {
           child: Column(
             children: [
               TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Usuário',
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Usuário inválido';
-                    }
-                    return null;
-                  }),
+                decoration: InputDecoration(
+                  hintText: 'Usuário',
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Usuário inválido';
+                  }
+                  return null;
+                },
+                onSaved: (txt) {
+                  setState(() {
+                    email = txt.toString();
+                  });
+                },
+              ),
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
@@ -40,14 +48,22 @@ class _LoginPage extends State<LoginPage> {
                   }
                   return null;
                 },
+                onSaved: (txt) {
+                  setState(() {
+                    senha = txt.toString();
+                  });
+                },
               ),
               ElevatedButton(
                   onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      Navigator.pushNamed(context, '/perfil');
+                      _formkey.currentState!.save();
+                      // Navigator.pushNamed(context, '/perfil');
                     }
                   },
-                  child: Text('Entrar'))
+                  child: Text('Entrar')),
+              Text('Usuário: $email'),
+              Text('Senha: $senha')
             ],
           ),
         ),
